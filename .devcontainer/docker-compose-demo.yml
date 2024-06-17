@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  stable-audio-open:
+    build: 
+      context: ..
+      dockerfile: .devcontainer/Dockerfile-dev
+      args:
+        # this needs to be replaced with one's own actual proxy information, or commented out
+        # PROXY: http://127.0.0.1:7890
+        XXXX_TAG: XXXX_TAG
+    volumes:
+      # we need to replace this with our own actual mapping path
+      - ..:/app    
+      - ~/.cache:/root/.cache    
+    command: sleep infinity
+    restart: unless-stopped
+    environment:
+      NVIDIA_VISIBLE_DEVICES: 0
+      # set huggingface token
+      # HUGGINGFACE_TOKEN: pull your huggingface token here
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu]
+    network_mode: bridge
+    shm_size: 22g
+    # ports:
+    #   - "0.0.0.0:17864:7860"

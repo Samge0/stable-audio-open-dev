@@ -1,0 +1,31 @@
+# using basic mirrors
+FROM samge/stable-audio-open-dev-base
+
+# set working directory
+WORKDIR /app
+
+# set proxy environment variables
+ARG PROXY
+ENV http_proxy=${PROXY} https_proxy=${PROXY}
+
+# configure scripts to be executed at startup for setting aliases and other environmental configurations
+RUN echo "alias pxyon='export https_proxy=${PROXY} http_proxy=${PROXY}'" >> /root/.bashrc && \
+    echo "alias pxyoff='unset https_proxy http_proxy'" >> /root/.bashrc && \
+    echo "alias giton='git config --global http.proxy \"${PROXY}\" && git config --global https.proxy \"${PROXY}\"'" >> /root/.bashrc && \
+    echo "alias gitoff='git config --global --unset http.proxy && git config --global --unset https.proxy'" >> /root/.bashrc
+
+# set PYTHONPATH
+RUN echo "export PYTHONPATH=/app" >> ~/.bashrc
+ENV PYTHONPATH=/app
+
+# declare the port on which the container listens
+EXPOSE 7860
+
+VOLUME [ "/app", "/root/.cache" ]
+
+# install dependencies, put small changes first
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# reset proxy configuration
+ENV http_proxy= https_proxy=

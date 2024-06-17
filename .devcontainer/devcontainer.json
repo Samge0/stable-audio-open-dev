@@ -1,0 +1,12 @@
+{
+	"name": "stable-audio-open",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "stable-audio-open",
+    "workspaceFolder": "/app",
+    "extensions": [
+        "ms-python.python",
+        "ms-python.debugpy",
+        "humao.rest-client",
+        "samge.vscode-samge-translate"
+    ]
+}

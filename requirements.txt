@@ -1,0 +1,2 @@
+stable_audio_tools==0.0.16
+huggingface_hub==0.23.3

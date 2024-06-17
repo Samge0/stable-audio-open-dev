@@ -1,0 +1,17 @@
+# set base mirror
+FROM samge/ai-env:cuda11.8.0-cudnn8-devel-ubuntu22.04-python3.8.18-torch2.2.0 as base
+
+ARG PROXY
+ENV http_proxy=${PROXY} https_proxy=${PROXY}
+
+
+FROM base as requirements
+
+RUN pip install stable_audio_tools==0.0.16
+RUN pip install huggingface_hub==0.23.3
+
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+# reset proxy configuration
+ENV http_proxy= https_proxy=
