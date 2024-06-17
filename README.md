@@ -19,3 +19,11 @@ Model address：[Stable-audio-open-1.0 (huggingface)](https://huggingface.co/sta
     ```
 
 [click here to show more>>](.devcontainer/README.md)
+
+### result
+
+- prompt = "upbeat and rhythmic electronic dance music with a catchy melody and strong bassline"
+  
+https://github.com/Samge0/stable-audio-open-dev/assets/17336101/8aa266ad-929d-44ae-8834-d10983221476
+
+![image](https://github.com/Samge0/stable-audio-open-dev/assets/17336101/69ef1f87-ed16-468e-8c2b-8e0128870f2e)
